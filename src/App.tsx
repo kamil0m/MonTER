@@ -1,20 +1,15 @@
-import { is } from 'date-fns/locale';
 import './App.css'
 import { useEffect,useRef, useState } from 'react'
-// import { parse, format } from 'date-fns';
+import { parse, format } from 'date-fns';
+import Departures from './components/Departures';
 
 function App() {
 
-  const [nextDepartures, setNextDepartures] = useState([
-    {
-      "stop_date_time": {
-        "arrival_date_time": "2021-10-01T11:00:00Z",
-        "base_arrival_date_time": "2021-10-01T11:00:00Z",
-        "base_departure_date_time": "2021-10-01T11:00:00Z",
-        "departure_date_time": "2021-10-01T11:00:00Z"
-      },
-    }, {}
-  ]);
+  const [nextTrainOut, setNextTrainOut] = useState([]);
+
+  const [departureOut0, setDepartureOut0] = useState('');
+  const [departureOut1, setDepartureOut1] = useState('');
+  const [departureOut2, setDepartureOut2] = useState('');
 
   const isFirstUpdate = useRef(0);
 
@@ -29,7 +24,7 @@ function App() {
         return resp.json(); // Transforms the answer into a JSON object
       }
     ).then(json => {
-        setNextDepartures(json.departures); // Transforms the answer into a JSON object and sets the state
+        setNextTrainOut(json.departures); // Transforms the answer into a JSON object and sets the state
         isFirstUpdate.current = 1;
       }
     ).catch(err => 
@@ -37,21 +32,29 @@ function App() {
     )
   }, []);
 
+  function formatTime(departureTime: string) {
+    const parsedDate = parse(departureTime, "yyyyMMdd'T'HHmmss", new Date());
+    const formatedTime = format(parsedDate, "HH:mm:ss"); // "07/03/2025 16:20:00"
+    return formatedTime;
+  }
   
   useEffect(() => {
     if (isFirstUpdate.current) {
-      console.log(nextDepartures[0].stop_date_time.base_departure_date_time);
+      setDepartureOut0(formatTime(nextTrainOut[0].stop_date_time.base_departure_date_time));
+      setDepartureOut1(formatTime(nextTrainOut[1].stop_date_time.base_departure_date_time));
+      setDepartureOut2(formatTime(nextTrainOut[2].stop_date_time.base_departure_date_time));
     }
-  }, [nextDepartures]); // Ten efekt uruchomi się za każdym razem, gdy nextDepartures się zmieni
+  }, [nextTrainOut]);
 
   return (
     <>
       <h1>MyTER</h1>
-      <div>Next trains to Lille</div>
-      <div>12:00</div>
-      <div>13:00</div>
-      <div>14:00</div>
-      <div>Next trains to Ascq</div>
+      <div>Next trains to Lille:</div>
+      <div>{departureOut0}</div>
+      <div>{departureOut1}</div>
+      <div>{departureOut2}</div>
+      <Departures stationCode="87286864" />
+      <div>Next trains to Ascq:</div>
       <div>12:00</div>
       <div>13:00</div>
       <div>14:00</div>
