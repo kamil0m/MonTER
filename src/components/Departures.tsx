@@ -2,28 +2,56 @@ import { useEffect,useRef, useState } from 'react'
 import { parse, format } from 'date-fns';
 
 export default function Departures(props) {
-  const [nextTrainOut, setNextTrainOut] = useState([]);
-  const [departureOut0, setDepartureOut0] = useState('');
-  const [departureOut1, setDepartureOut1] = useState('');
-  const [departureOut2, setDepartureOut2] = useState('');
+  const [nextTrains, setNextTrains] = useState([]);
+  const [departure0, setDeparture0] = useState('');
+  const [departure1, setDeparture1] = useState('');
+  const [departure2, setDeparture2] = useState('');
 
   const isFirstUpdate = useRef(0);
 
-  console.log(props);
+//   useEffect(() => {
+//      fetch(`https://api.sncf.com/v1/coverage/sncf/stop_areas/stop_area:SNCF:${props.stationCode}&route:P81/departures`, 
+//        {
+//          headers: {
+//            Authorization: 'c18b1a6c-1e4e-46d0-850c-3e442e26cb84'
+//          }
+//        }
+//      ).then(resp => {
+//          return resp.json(); // Transforms the answer into a JSON object and returns it
+//        }
+//      ).then(json => {
+//            const filteredArray = json.departures.filter(departure => departure.display_informations.direction === "Lille Flandres (Lille)"); // filters the array to keep only the trains going to the right direction
+//            setNextTrains(filteredArray);
+//            isFirstUpdate.current = 1;
+//        }
+//      ).catch(err => 
+//        console.log(err)
+//      )
+//    }, []);
 
   useEffect(() => {
-    fetch(`https://api.sncf.com/v1/coverage/sncf/stop_areas/stop_area:SNCF:${props.stationCode}/departures`, 
+    fetch(`https://api.sncf.com/v1/coverage/sncf/stop_areas/stop_area:SNCF:${props.stationCode}/departures?count=40`, 
       {
         headers: {
           Authorization: 'c18b1a6c-1e4e-46d0-850c-3e442e26cb84'
         }
       }
     ).then(resp => {
-        return resp.json(); // Transforms the answer into a JSON object
+        return resp.json(); // Transforms the answer into a JSON object and returns it
       }
     ).then(json => {
-        setNextTrainOut(json.departures); // Transforms the answer into a JSON object and sets the state
-        isFirstUpdate.current = 1;
+          console.log(json);
+          if (props.stationCode === "87286864") {
+
+               const filteredArray = json.departures.filter(departure => departure.display_informations.direction === "Lille Flandres (Lille)"); // filters the array to keep only the trains going to the right direction
+               setNextTrains(filteredArray);
+               isFirstUpdate.current = 1;
+
+          } else {
+               const filteredArray = json.departures.filter(departure => departure.display_informations.direction === "Tournai (Tournai)"); // filters the array to keep only the trains going to the right direction
+               setNextTrains(filteredArray);
+               isFirstUpdate.current = 1;
+          }
       }
     ).catch(err => 
       console.log(err)
@@ -32,25 +60,24 @@ export default function Departures(props) {
 
   function formatTime(departureTime: string) {
     const parsedDate = parse(departureTime, "yyyyMMdd'T'HHmmss", new Date());
-    const formatedTime = format(parsedDate, "HH:mm:ss"); // "07/03/2025 16:20:00"
+    const formatedTime = format(parsedDate, "HH:mm");
     return formatedTime;
   }
   
   useEffect(() => {
     if (isFirstUpdate.current) {
-      setDepartureOut0(formatTime(nextTrainOut[0].stop_date_time.base_departure_date_time));
-      setDepartureOut1(formatTime(nextTrainOut[1].stop_date_time.base_departure_date_time));
-      setDepartureOut2(formatTime(nextTrainOut[2].stop_date_time.base_departure_date_time));
+      setDeparture0(formatTime(nextTrains[0].stop_date_time.base_departure_date_time));
+      setDeparture1(formatTime(nextTrains[1].stop_date_time.base_departure_date_time));
+      setDeparture2(formatTime(nextTrains[2].stop_date_time.base_departure_date_time));
     }
-  }, [nextTrainOut]);
+  }, [nextTrains]);
 
   return (
     <>
-      <h1>MyTER</h1>
-      <div>Next trains to Lille:</div>
-      <div>{departureOut0}</div>
-      <div>{departureOut1}</div>
-      <div>{departureOut2}</div>
+      <div>Next trains to {props.stationCode === "87286864" ? "Lille" : "Ascq"}</div>
+      <div>{departure0}</div>
+      <div>{departure1}</div>
+      <div>{departure2}</div>
     </>
   )
 }
