@@ -1,0 +1,203 @@
+{
+    "route": {
+        "id": "route:SNCF:FR:Line::F59B9C62-1417-47C0-983A-18064F9C7F28:",
+        "name": "P81",
+        "is_frequence": "False",
+        "direction_type": "forward",
+        "physical_modes": [
+            {
+                "id": "physical_mode:Train",
+                "name": "TER / Intercités"
+            }
+        ],
+        "direction": {
+            "id": "stop_area:SNCF:87286005",
+            "name": "Lille Flandres (Lille)",
+            "quality": 0,
+            "stop_area": {
+                "id": "stop_area:SNCF:87286005",
+                "name": "Lille Flandres",
+                "codes": [
+                    {
+                        "type": "source",
+                        "value": "87286005"
+                    },
+                    {
+                        "type": "uic",
+                        "value": "87286005"
+                    }
+                ],
+                "timezone": "Europe/Paris",
+                "label": "Lille Flandres (Lille)",
+                "coord": {
+                    "lon": "3.06987",
+                    "lat": "50.636577"
+                },
+                "links": []
+            },
+            "embedded_type": "stop_area"
+        },
+        "geojson": {
+            "type": "MultiLineString",
+            "coordinates": []
+        },
+        "links": [],
+        "line": {
+            "id": "line:SNCF:FR:Line::F59B9C62-1417-47C0-983A-18064F9C7F28:",
+            "name": "P81",
+            "code": "P81",
+            "color": "",
+            "text_color": "",
+            "codes": [],
+            "physical_modes": [
+                {
+                    "id": "physical_mode:Train",
+                    "name": "TER / Intercités"
+                }
+            ],
+            "commercial_mode": {
+                "id": "commercial_mode:FR:Branding::6dfb1ec4-50b5-42a8-a531-a792b1ea6f2e:",
+                "name": "TER HDF"
+            },
+            "network": {
+                "id": "network:SNCF:FR:Branding::6dfb1ec4-50b5-42a8-a531-a792b1ea6f2e:",
+                "name": "TER HDF",
+                "links": []
+            },
+            "opening_time": "060100",
+            "closing_time": "223500",
+            "geojson": {
+                "type": "MultiLineString",
+                "coordinates": []
+            },
+            "links": []
+        }
+    },
+    "stop_point": {
+        "id": "stop_point:SNCF:87286864:Train",
+        "name": "Ascq",
+        "label": "Ascq (Villeneuve-d'Ascq)",
+        "coord": {
+            "lon": "3.159905",
+            "lat": "50.621804"
+        },
+        "links": [],
+        "commercial_modes": [
+            {
+                "id": "commercial_mode:FR:Branding::6dfb1ec4-50b5-42a8-a531-a792b1ea6f2e:",
+                "name": "TER HDF"
+            }
+        ],
+        "physical_modes": [
+            {
+                "id": "physical_mode:Train",
+                "name": "TER / Intercités",
+                "co2_emission_rate": {
+                    "value": 11.9,
+                    "unit": "gEC/Km"
+                }
+            }
+        ],
+        "administrative_regions": [
+            {
+                "id": "admin:fr:59009",
+                "name": "Villeneuve-d'Ascq",
+                "level": 8,
+                "zip_code": "59491;59650",
+                "label": "Villeneuve-d'Ascq (59491-59650)",
+                "insee": "59009",
+                "coord": {
+                    "lon": "3.1314002",
+                    "lat": "50.6193174"
+                }
+            }
+        ],
+        "stop_area": {
+            "id": "stop_area:SNCF:87286864",
+            "name": "Ascq",
+            "codes": [
+                {
+                    "type": "source",
+                    "value": "87286864"
+                },
+                {
+                    "type": "uic",
+                    "value": "87286864"
+                }
+            ],
+            "timezone": "Europe/Paris",
+            "label": "Ascq (Villeneuve-d'Ascq)",
+            "coord": {
+                "lon": "3.159905",
+                "lat": "50.621804"
+            },
+            "links": [],
+            "administrative_regions": [
+                {
+                    "id": "admin:fr:59009",
+                    "name": "Villeneuve-d'Ascq",
+                    "level": 8,
+                    "zip_code": "59491;59650",
+                    "label": "Villeneuve-d'Ascq (59491-59650)",
+                    "insee": "59009",
+                    "coord": {
+                        "lon": "3.1314002",
+                        "lat": "50.6193174"
+                    }
+                }
+            ]
+        },
+        "equipments": []
+    },
+    "stop_date_time": {
+        "departure_date_time": "20250307T151800",
+        "base_departure_date_time": "20250307T151800",
+        "arrival_date_time": "20250307T151700",
+        "base_arrival_date_time": "20250307T151700",
+        "additional_informations": [],
+        "links": [],
+        "data_freshness": "base_schedule"
+    },
+    "display_informations": {
+        "commercial_mode": "TER HDF",
+        "network": "TER HDF",
+        "direction": "Tournai (Tournai)",
+        "label": "P81",
+        "color": "",
+        "code": "P81",
+        "headsign": "19941",
+        "name": "P81",
+        "links": [],
+        "text_color": "",
+        "trip_short_name": "19941",
+        "description": "",
+        "physical_mode": "TER / Intercités",
+        "equipments": []
+    },
+    "links": [
+        {
+            "type": "line",
+            "id": "line:SNCF:FR:Line::F59B9C62-1417-47C0-983A-18064F9C7F28:"
+        },
+        {
+            "type": "vehicle_journey",
+            "id": "vehicle_journey:SNCF:2025-03-07:19941:1187:Train"
+        },
+        {
+            "type": "route",
+            "id": "route:SNCF:FR:Line::F59B9C62-1417-47C0-983A-18064F9C7F28:"
+        },
+        {
+            "type": "commercial_mode",
+            "id": "commercial_mode:FR:Branding::6dfb1ec4-50b5-42a8-a531-a792b1ea6f2e:"
+        },
+        {
+            "type": "physical_mode",
+            "id": "physical_mode:Train"
+        },
+        {
+            "type": "network",
+            "id": "network:SNCF:FR:Branding::6dfb1ec4-50b5-42a8-a531-a792b1ea6f2e:"
+        }
+    ]
+}
